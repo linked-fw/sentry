@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/linked-cm/sentry.git"
+    "url": "git+https://github.com/linked-fw/sentry.git"
   },
   "version": "1.0.5",
   "type": "module",
