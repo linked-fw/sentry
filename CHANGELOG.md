@@ -1,5 +1,11 @@
 # @\_linked/sentry
 
+## 1.0.6
+
+### Patch Changes
+
+- [#11](https://github.com/linked-fw/sentry/pull/11) [`5e93859`](https://github.com/linked-fw/sentry/commit/5e9385914e7aa4aa978b67a8a4cf6311ffe97ab5) Thanks [@flyon](https://github.com/flyon)! - Declare npm as the package manager for this repo, convert the build scripts off `yarn`, and mark `package-lock.json` as a generated file.
+
 ## 1.0.3
 
 ### Patch Changes

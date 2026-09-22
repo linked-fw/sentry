@@ -10,7 +10,7 @@ Prefix.add('sentry', base);
 
 export const loadData = () => {
   //@ts-ignore
-  return import(dataFile, { with: { type: 'json' } }).then(
+  return import(/* @vite-ignore */ dataFile, { with: { type: 'json' } }).then(
     (data) => data.default
   );
 };
