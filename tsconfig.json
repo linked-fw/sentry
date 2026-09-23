@@ -10,13 +10,29 @@
     "skipLibCheck": true,
     "pretty": true,
     "jsx": "react",
-    "types": ["node", "react", "react-dom"],
+    "types": [
+      "node",
+      "react",
+      "react-dom"
+    ],
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
       }
     ]
   },
-  "files": ["./src/index.ts"],
-  "include": ["./src/backend.ts"]
+  "files": [
+    "./src/index.ts"
+  ],
+  "include": [
+    "./src/backend.ts",
+    "./src/**/*.ts"
+  ],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "./src/__tests__/**",
+    "./src/tests/**",
+    "./src/test-helpers/**"
+  ]
 }
