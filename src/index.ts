@@ -1,5 +1,5 @@
 import './types.js';
-import './ontologies/sentry.js';
+import './ontologies/sentry.register.js';
 
 //SHAPES FIRST
 

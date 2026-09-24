@@ -1,7 +1,5 @@
 import { Prefix } from '@_linked/core/utils/Prefix';
 import { createNameSpace } from '@_linked/core/utils/NameSpace';
-import { linkedOntology } from '../package.js';
-import * as _this from './sentry.js';
 
 const dataFile = '../data/sentry.json';
 const base = 'http://lincd.org/ont/sentry/';
@@ -27,4 +25,3 @@ export const sentry = {
   exampleProperty,
 };
 
-linkedOntology(_this, ns, 'sentry', loadData, dataFile);
