@@ -55,6 +55,19 @@ initSentryInstrumentation();
 
 The initializer is safe to call more than once.
 
+Native Node profiling is a separate opt-in because its binary must match the
+host Node ABI and libc:
+
+```json
+{
+  "SENTRY_PROFILING_ENABLED": "true"
+}
+```
+
+When profiling is disabled, standard backend error reporting and tracing still
+work. If an explicitly enabled native profiler cannot load, initialization
+logs a warning and continues without profiling.
+
 ## Privacy
 
 The `beforeSend` hook recursively redacts values whose keys resemble email,
@@ -63,6 +76,6 @@ when introducing new user metadata or custom event payloads.
 
 ## Profiling
 
-Backend profiling uses `@sentry/profiling-node`. Verify its native dependency
-compatibility on older Linux hosts. If the native profiler cannot load, disable
-profiling for that environment while retaining standard error reporting.
+Backend profiling uses `@sentry/profiling-node` only when
+`SENTRY_PROFILING_ENABLED=true`. Keep it disabled on hosts whose Node ABI or
+libc is incompatible with the native profiler.

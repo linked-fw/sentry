@@ -40,12 +40,28 @@ function sanitizeObject(obj: Record<string, unknown>) {
   return sanitized;
 }
 
+/**
+ * Opt-in gate shared by frontend and backend init paths.
+ *
+ * A DSN alone must never turn reporting on: local/staging often copy production
+ * env files. Callers must set `SENTRY_ENABLED=true` explicitly, plus DSN,
+ * `NODE_ENV`, and `SITE_ROOT` (used for release tags / scrubbing context).
+ */
 export function shouldEnableSentry() {
   return (
     process.env.SENTRY_ENABLED === 'true' &&
     !!process.env.SENTRY_DSN &&
     !!process.env.NODE_ENV &&
     !!process.env.SITE_ROOT
+  );
+}
+
+/** Native profiling is deliberately a second opt-in because its binary must
+ * match the host Node ABI and libc. Error reporting remains available when
+ * profiling is disabled or cannot load. */
+export function shouldEnableSentryProfiling() {
+  return (
+    shouldEnableSentry() && process.env.SENTRY_PROFILING_ENABLED === 'true'
   );
 }
 
