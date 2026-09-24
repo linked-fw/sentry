@@ -1,38 +1,23 @@
-import { IErrorLogger } from '@_linked/core/utils/LinkedErrorLogging';
+import type { IErrorLogger } from '@_linked/core/utils/LinkedErrorLogging';
 import * as Sentry from '@sentry/capacitor';
 import * as SentryReact from '@sentry/react';
+import { getSentryBaseOptions, shouldEnableSentry } from './sentry-config.js';
 // captureConsoleIntegration is built into @sentry/react v8+ (was previously
 // in the separate @sentry/integrations package, which no longer publishes v8).
-const {captureConsoleIntegration} = SentryReact;
+const { captureConsoleIntegration } = SentryReact;
 
 export class SentryFrontendErrorLogger implements IErrorLogger {
-  constructor() {
-    // check if required environment variables are set
-    if (
-      !process.env.SENTRY_DSN ||
-      !process.env.NODE_ENV ||
-      !process.env.SITE_ROOT
-    ) {
-      console.error(
-        'Required environment variables sentry are not set. Sentry is not initialized.'
-      );
-      return;
-    }
+  private enabled = false;
 
-    // disable logging during development
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Sentry is disabled in development mode.');
+  constructor() {
+    if (!shouldEnableSentry()) {
       return;
     }
 
     Sentry.init(
       {
-        dsn: process.env.SENTRY_DSN,
-        environment: process.env.NODE_ENV,
-        // Set your release version, such as "projectname@1.0.0"
-        release: `${process.env.npm_package_name}@${process.env.npm_package_version}`,
+        ...getSentryBaseOptions(),
         integrations: [
-          //NOTE: had to upgrade @sentry/capacitor to make this compile
           Sentry.browserTracingIntegration() as never,
           Sentry.replayIntegration({
             maskAllText: false,
@@ -42,14 +27,22 @@ export class SentryFrontendErrorLogger implements IErrorLogger {
             levels: ['error'],
           }) as never,
         ],
-        // Performance Monitoring
-        tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
-        // Session Replay
-        replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
-        replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
+        tracesSampleRate: 0.1,
+        replaysSessionSampleRate: 0.1,
+        replaysOnErrorSampleRate: 1.0,
       },
-      // Forward the init method from @sentry/react
       SentryReact.init
     );
+
+    this.enabled = true;
+  }
+
+  async log(error: any): Promise<void> {
+    if (!this.enabled) {
+      return;
+    }
+
+    Sentry.captureException(error);
+    await Sentry.flush(2000);
   }
 }

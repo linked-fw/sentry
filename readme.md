@@ -1,38 +1,81 @@
-# How to use LINCD Sentry
+# @_linked/sentry
 
-## Introduction
+Shared Sentry setup for Linked applications on the backend (`@sentry/node`)
+and frontend (`@sentry/react` with `@sentry/capacitor`).
 
-LINCD Sentry is a powerful error tracking tool that can be integrated into both Express (backend) and React (frontend) applications.
+## Configuration
 
-## Installation
-
-To install LINCD Sentry, use the following command:
+Sentry requires explicit enablement and all required runtime metadata:
 
 ```json
-yarn add @sentry/capacitor lincd-sentry
+{
+  "SENTRY_ENABLED": "true",
+  "SENTRY_DSN": "https://example.ingest.sentry.io/123456",
+  "NODE_ENV": "production",
+  "SITE_ROOT": "https://app.example.com"
+}
 ```
 
-Next, add the `SENTRY_DSN` and `SITE_ROOT` to your environment variables. This can be obtained from your Sentry Project Settings.
+`SENTRY_ENABLED` must be exactly `"true"`. This prevents a configured DSN from
+accidentally enabling reporting in local or staging environments.
 
-```
-"SITE_ROOT": "https://app.your-project.com",
-"SENTRY_DSN": "https://1984939c....ingest.us.sentry.io/4506862...",
-```
+The shared configuration provides:
 
-#### Usage
+- consistent release and environment tags;
+- conservative scrubbing of common sensitive fields;
+- common network and abort-error filters;
+- idempotent backend instrumentation;
+- aligned frontend and backend sampling.
 
-##### Frontend
+## Frontend
 
-To use LINCD Sentry in your frontend application, import `LinkedErrorLogging` from `lincd` and `SentryFrontendErrorLogger` from `lincd-sentry` in your main index file.
+Register the frontend logger during application startup:
 
-```tsx
-import { LinkedErrorLogging } from '@_linked/core/lib/utils/LinkedErrorLogging';
-import { SentryFrontendErrorLogger } from 'lincd-sentry/lib/utils/SentryFrontendErrorLogger';
+```ts
+import { LinkedErrorLogging } from '@_linked/core/utils/LinkedErrorLogging';
+import { SentryFrontendErrorLogger } from '@_linked/sentry/utils/SentryFrontendErrorLogger';
 
-// init sentry logging before rendering the app
 LinkedErrorLogging.setDefaultLogger(new SentryFrontendErrorLogger());
 ```
 
-##### Backend
+## Backend
 
-If you have `SENTRY_DSN` and `SITE_ROOT` defined in your environment variables, the Sentry backend will be set up automatically.
+Loading `@_linked/sentry/backend` registers the package provider. It initializes
+instrumentation before controllers, installs the shared error logger, and adds
+the Express error handler after controllers.
+
+For the best tracing coverage, initialize instrumentation before Express is
+imported:
+
+```ts
+import { initSentryInstrumentation } from '@_linked/sentry/utils/instrument';
+
+initSentryInstrumentation();
+```
+
+The initializer is safe to call more than once.
+
+Native Node profiling is a separate opt-in because its binary must match the
+host Node ABI and libc:
+
+```json
+{
+  "SENTRY_PROFILING_ENABLED": "true"
+}
+```
+
+When profiling is disabled, standard backend error reporting and tracing still
+work. If an explicitly enabled native profiler cannot load, initialization
+logs a warning and continues without profiling.
+
+## Privacy
+
+The `beforeSend` hook recursively redacts values whose keys resemble email,
+phone, password, token, authorization, cookie, or DSN fields. Review this list
+when introducing new user metadata or custom event payloads.
+
+## Profiling
+
+Backend profiling uses `@sentry/profiling-node` only when
+`SENTRY_PROFILING_ENABLED=true`. Keep it disabled on hosts whose Node ABI or
+libc is incompatible with the native profiler.
