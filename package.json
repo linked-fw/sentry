@@ -15,7 +15,7 @@
   "type": "module",
   "linkedPackage": true,
   "main": "lib/cjs/index.js",
-  "types": "dist/sentry.d.ts",
+  "types": "index.d.ts",
   "license": "ISC",
   "scripts": {
     "start": "npm exec linked dev",
