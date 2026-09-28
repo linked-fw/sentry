@@ -1,5 +1,66 @@
 # @\_linked/sentry
 
+## 1.1.0
+
+### Minor Changes
+
+- [#22](https://github.com/linked-fw/sentry/pull/22) [`fc168bd`](https://github.com/linked-fw/sentry/commit/fc168bd92af9ac92c78ca43629faad97491cb78c) Thanks [@flyon](https://github.com/flyon)! - Require `@_linked/core@^2.22.8` (was `^2.21.0`), and pin it in the lockfile.
+
+  The declared range was wide enough that the resolved core depended on whatever the
+  consumer — or this repo's own CI, via `package-lock.json` — happened to install. Core
+  decides how a shape's IRI is minted, so a stale core made this package emit legacy
+  `data.lincd.org` IRIs instead of the arch-02 `linked.cm` scheme. Which IRIs a published
+  package produces should not be a function of the installer's dependency tree.
+
+  Minor rather than patch: this raises the minimum core a consumer must resolve, so it
+  changes what gets installed rather than only what this package does internally.
+
+## 1.0.10
+
+### Patch Changes
+
+- [#20](https://github.com/linked-fw/sentry/pull/20) [`350ce71`](https://github.com/linked-fw/sentry/commit/350ce716eed37b8f0d8d6f324680481a7b91b7ac) Thanks [@flyon](https://github.com/flyon)! - Give this package its own linked identity
+
+  `src/package.ts` re-exported core's decorators verbatim and declared
+  `packageName` as a bare literal that nothing was bound to, so everything
+  declared here registered under `@_linked/core`: the `sentry` ontology landed in
+  core's entry in the package tree, and the next `@linkedShape` added here would
+  silently have been given a `.../shape/core/...` IRI. `Server.call` routes on
+  the package name a shape carries, so one naming the wrong package is simply
+  unreachable.
+
+  **No shape IRI changes**, because no shape is decorated here today — that is
+  why this is a patch and not a minor. The only visible change is where the
+  `sentry` ontology is registered in the package tree.
+
+  Same defect and same fix as linked-fw/owl#26, where shapes did exist and the
+  IRIs did change.
+
+## 1.0.9
+
+### Patch Changes
+
+- [#18](https://github.com/linked-fw/sentry/pull/18) [`1c8b842`](https://github.com/linked-fw/sentry/commit/1c8b842d44a0bb522468218bdc883d08564f5f29) Thanks [@flyon](https://github.com/flyon)! - Point `types` at `index.d.ts` so a bare import gets types under node10 resolution.
+
+  `typesVersions` (`{"*": {"*": ["lib/esm/*"]}}`) is applied to the root `types` value, so the
+  previous value resolved to a path under `lib/esm/` that the build never emits. Subpath imports
+  resolved fine through `exports`, which hid the failure from a bare `import … from '@_linked/sentry'`.
+
+## 1.0.8
+
+### Patch Changes
+
+- [#16](https://github.com/linked-fw/sentry/pull/16) [`a1c5c28`](https://github.com/linked-fw/sentry/commit/a1c5c28112cdb30ec665480a324c990d077d1cac) Thanks [@flyon](https://github.com/flyon)! - The ontology no longer registers by importing itself.
+
+  It carried `import * as _this from './<prefix>.js'` and passed that namespace to
+  `linkedOntology()`. Under `tsc` the self-reference survives; under a bundler it does
+  not — Rollup treats it as a circular import and elides it, so the binding is
+  `undefined` and a consuming app dies at boot with `_this is not defined`.
+
+  Registration now lives in a `<prefix>.register.ts` sibling, imported from the package
+  entry. Nothing changes for consumers: importing this package still registers the
+  ontology.
+
 ## 1.0.7
 
 ### Patch Changes
