@@ -1,5 +1,11 @@
 # @\_linked/sentry
 
+## 1.1.1
+
+### Patch Changes
+
+- [#25](https://github.com/linked-fw/sentry/pull/25) [`d81692f`](https://github.com/linked-fw/sentry/commit/d81692f05e799dc57fed010c867e28a35f03ba7d) Thanks [@flyon](https://github.com/flyon)! - Sourcemaps now embed their TypeScript source, so consumers no longer see 'points to missing source files' warnings.
+
 ## 1.1.0
 
 ### Minor Changes
