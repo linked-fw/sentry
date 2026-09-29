@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@_linked/cli": "^1.19.0",
-    "@changesets/changelog-github": "^0.5.2",
+    "@changesets/changelog-github": "^0.7.0",
     "@changesets/cli": "^2.29.8",
     "copyfiles": "^2.4.1",
     "rimraf": "^5.0.7",
