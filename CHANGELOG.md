@@ -1,5 +1,11 @@
 # @\_linked/sentry
 
+## 1.1.2
+
+### Patch Changes
+
+- [#37](https://github.com/linked-fw/sentry/pull/37) [`366b193`](https://github.com/linked-fw/sentry/commit/366b193cbb9cca7319a2b5966fb9be3ad2dbeeeb) Thanks [@flyon](https://github.com/flyon)! - `main` now points at `lib/esm/index.js`. It named `lib/cjs/index.js`, which the build has never produced — the package is ESM-only — so any resolver that reads `main` instead of `exports` could not find the package at all. The unused `tsconfig-cjs.json` is removed, so `linked build` no longer compiles a CommonJS copy nothing can load.
+
 ## 1.1.1
 
 ### Patch Changes
