@@ -1,5 +1,11 @@
 # @\_linked/sentry
 
+## 1.1.3
+
+### Patch Changes
+
+- [#39](https://github.com/linked-fw/sentry/pull/39) [`e1b0ac5`](https://github.com/linked-fw/sentry/commit/e1b0ac51257c40e90042293d2293634b21790240) Thanks [@flyon](https://github.com/flyon)! - `SentryBackendErrorLogger` no longer crashes with `ReferenceError: require is not defined` when Sentry is enabled (SENTRY_DSN + SITE_ROOT set, non-development NODE_ENV). The package is ESM; `@sentry/node` is now imported statically, the same module instance `backend.ts` already uses.
+
 ## 1.1.2
 
 ### Patch Changes
