@@ -1,7 +1,11 @@
 import { IErrorLogger } from '@_linked/core/utils/LinkedErrorLogging';
+import * as Sentry from '@sentry/node';
 
-type SentryModule = typeof import('@sentry/node');
-let sentryModule: SentryModule | null = null;
+// This package is ESM, so `require` does not exist at runtime. `@sentry/node`
+// is a regular dependency and backend.ts already imports it statically, so a
+// static import here costs nothing extra and shares the same module instance
+// (a `createRequire` would load Sentry's CJS build: a second, separate copy).
+let sentryEnabled = false;
 
 export class SentryBackendErrorLogger implements IErrorLogger {
   constructor(server) {
@@ -23,17 +27,7 @@ export class SentryBackendErrorLogger implements IErrorLogger {
       return;
     }
 
-    if (!sentryModule) {
-      // Load Sentry lazily so development builds never touch the dependency.
-      sentryModule = require('@sentry/node');
-    }
-
-    const Sentry = sentryModule;
-    if (!Sentry) {
-      console.error('Unable to load @sentry/node runtime');
-      return;
-    }
-
+    sentryEnabled = true;
     console.log('Sentry initialized with DSN:', process.env.SENTRY_DSN);
     // RequestHandler creates a separate execution context, so that all
     // transactions/spans/breadcrumbs are isolated across requests
@@ -47,14 +41,9 @@ export class SentryBackendErrorLogger implements IErrorLogger {
    * @returns
    */
   log(error: any): Promise<void> {
-    return new Promise((resolve) => {
-      if (!sentryModule) {
-        resolve();
-        return;
-      }
-
-      sentryModule.captureException(error);
-      resolve();
-    });
+    if (sentryEnabled) {
+      Sentry.captureException(error);
+    }
+    return Promise.resolve();
   }
 }
