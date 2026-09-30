@@ -35,7 +35,7 @@
     "@_linked/core": "^2.22.8",
     "@_linked/server-utils": "^1.3.0",
     "@sentry/capacitor": "1.4.0",
-    "@sentry/node": "8.55.0",
+    "@sentry/node": "10.75.2",
     "@sentry/profiling-node": "8.55.0",
     "@sentry/react": "8.55.0"
   },
