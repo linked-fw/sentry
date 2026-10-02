@@ -1,5 +1,13 @@
 # @\_linked/sentry
 
+## 1.2.0
+
+### Minor Changes
+
+- [#42](https://github.com/linked-fw/sentry/pull/42) [`42b3ef4`](https://github.com/linked-fw/sentry/commit/42b3ef4246e5308882ec17b8c88fb3c7a5af7d4f) Thanks [@flyon](https://github.com/flyon)! - The sentry ontology moves from `http://lincd.org/ont/sentry/` to `https://linked.cm/ont/sentry/`, the first-party scheme every public package uses (`https://linked.cm/ont/{publicSlug}/`).
+  
+  No data migration is needed: its terms (`sentry.ExampleClass`, `sentry.exampleProperty`) are scaffold placeholders that nothing uses, and no stored data or shape carries them. The prefix key (`sentry`) and the `ontologies/sentry` module are unchanged.
+
 ## 1.1.3
 
 ### Patch Changes
