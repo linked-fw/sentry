@@ -2,7 +2,12 @@ import { Prefix } from '@_linked/core/utils/Prefix';
 import { createNameSpace } from '@_linked/core/utils/NameSpace';
 
 const dataFile = '../data/sentry.json';
-const base = 'http://lincd.org/ont/sentry/';
+/**
+ * First-party ontologies live on linked.cm: `https://linked.cm/ont/{ontologySlug}/`, and a
+ * package's own ontology takes the package's publicSlug (`@_linked/sentry` → `sentry`).
+ * Until this release it was `http://lincd.org/ont/sentry/`; none of its terms types stored data.
+ */
+const base = 'https://linked.cm/ont/sentry/';
 
 Prefix.add('sentry', base);
 
