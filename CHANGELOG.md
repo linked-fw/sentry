@@ -1,5 +1,31 @@
 # @\_linked/sentry
 
+## 1.2.0
+
+### Minor Changes
+
+- [#42](https://github.com/linked-fw/sentry/pull/42) [`42b3ef4`](https://github.com/linked-fw/sentry/commit/42b3ef4246e5308882ec17b8c88fb3c7a5af7d4f) Thanks [@flyon](https://github.com/flyon)! - The sentry ontology moves from `http://lincd.org/ont/sentry/` to `https://linked.cm/ont/sentry/`, the first-party scheme every public package uses (`https://linked.cm/ont/{publicSlug}/`).
+  
+  No data migration is needed: its terms (`sentry.ExampleClass`, `sentry.exampleProperty`) are scaffold placeholders that nothing uses, and no stored data or shape carries them. The prefix key (`sentry`) and the `ontologies/sentry` module are unchanged.
+
+## 1.1.3
+
+### Patch Changes
+
+- [#39](https://github.com/linked-fw/sentry/pull/39) [`e1b0ac5`](https://github.com/linked-fw/sentry/commit/e1b0ac51257c40e90042293d2293634b21790240) Thanks [@flyon](https://github.com/flyon)! - `SentryBackendErrorLogger` no longer crashes with `ReferenceError: require is not defined` when Sentry is enabled (SENTRY_DSN + SITE_ROOT set, non-development NODE_ENV). The package is ESM; `@sentry/node` is now imported statically, the same module instance `backend.ts` already uses.
+
+## 1.1.2
+
+### Patch Changes
+
+- [#37](https://github.com/linked-fw/sentry/pull/37) [`366b193`](https://github.com/linked-fw/sentry/commit/366b193cbb9cca7319a2b5966fb9be3ad2dbeeeb) Thanks [@flyon](https://github.com/flyon)! - `main` now points at `lib/esm/index.js`. It named `lib/cjs/index.js`, which the build has never produced — the package is ESM-only — so any resolver that reads `main` instead of `exports` could not find the package at all. The unused `tsconfig-cjs.json` is removed, so `linked build` no longer compiles a CommonJS copy nothing can load.
+
+## 1.1.1
+
+### Patch Changes
+
+- [#25](https://github.com/linked-fw/sentry/pull/25) [`d81692f`](https://github.com/linked-fw/sentry/commit/d81692f05e799dc57fed010c867e28a35f03ba7d) Thanks [@flyon](https://github.com/flyon)! - Sourcemaps now embed their TypeScript source, so consumers no longer see 'points to missing source files' warnings.
+
 ## 1.1.0
 
 ### Minor Changes
