@@ -17,6 +17,10 @@
   "main": "lib/esm/index.js",
   "types": "index.d.ts",
   "license": "ISC",
+  "files": [
+    "lib",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "start": "npm exec linked dev",
     "build": "rimraf ./lib && npm run build-esm && npm run copy-to-lib",
