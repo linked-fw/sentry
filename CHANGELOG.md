@@ -1,5 +1,11 @@
 # @\_linked/sentry
 
+## 1.2.1
+
+### Patch Changes
+
+- [#49](https://github.com/linked-fw/sentry/pull/49) [`e318ef5`](https://github.com/linked-fw/sentry/commit/e318ef59e82457ed8b448c119c64fb4835db432b) Thanks [@flyon](https://github.com/flyon)! - Publish only the files consumers need; the tarball no longer includes `.changeset/`, `.gitattributes`, `.github/`, `docs/`, `renovate.json`, `test/` or tsconfig files.
+
 ## 1.2.0
 
 ### Minor Changes
