@@ -1,5 +1,11 @@
 # @\_linked/sentry
 
+## 1.2.2
+
+### Patch Changes
+
+- [#52](https://github.com/linked-fw/sentry/pull/52) [`dc6299b`](https://github.com/linked-fw/sentry/commit/dc6299b279f8607b3393fad637f5cf1fbcdca265) Thanks [@flyon](https://github.com/flyon)! - Build with `linked build`, the standard build for linked packages. The published `lib/` holds the same files as before; the `rimraf` and `copyfiles` dev dependencies are gone. The type packages the compiler config already relies on (`@types/node`, `@types/react`, `@types/react-dom`) are now declared as dev dependencies instead of arriving transitively.
+
 ## 1.2.1
 
 ### Patch Changes
