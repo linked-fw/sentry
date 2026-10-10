@@ -24,7 +24,7 @@
   "scripts": {
     "start": "npm exec linked dev",
     "build": "linked build",
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs tests/*.test.mjs"
   },
   "keywords": [
     "lincd",
