@@ -1,17 +1,23 @@
 import { BackendProvider } from '@_linked/server-utils/utils/BackendProvider';
-import * as Sentry from '@sentry/node';
 import { SentryBackendErrorLogger } from './utils/SentryBackendErrorLogger.js';
 import { LinkedErrorLogging } from '@_linked/core/utils/LinkedErrorLogging';
+import {
+  getSentryNode,
+  initSentryInstrumentation,
+} from './utils/instrument.js';
+import { shouldEnableSentry } from './utils/sentry-config.js';
 
 export default class SentryBackendProvider extends BackendProvider {
   setupBeforeControllers() {
-    // Set SentryBackendErrorLogger as the default logger
-    LinkedErrorLogging.setDefaultLogger(
-      new SentryBackendErrorLogger(this.server)
-    );
+    if (shouldEnableSentry()) {
+      initSentryInstrumentation();
+      LinkedErrorLogging.setDefaultLogger(new SentryBackendErrorLogger());
+    }
   }
 
   setupAfterControllers() {
-    Sentry.setupExpressErrorHandler(this.server);
+    if (shouldEnableSentry()) {
+      getSentryNode()?.setupExpressErrorHandler(this.server);
+    }
   }
 }
