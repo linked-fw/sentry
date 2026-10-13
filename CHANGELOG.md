@@ -1,5 +1,15 @@
 # @\_linked/sentry
 
+## 1.3.0
+
+### Minor Changes
+
+- [#7](https://github.com/linked-fw/sentry/pull/7) [`7a7f576`](https://github.com/linked-fw/sentry/commit/7a7f57622d8599ef9e103c467541a8e05f4034e3) Thanks [@abdipramana](https://github.com/abdipramana)! - Add shared opt-in Sentry configuration, recursive sensitive-field scrubbing,
+  working frontend error capture, and idempotent backend initialization. Native
+  Node profiling is now separately enabled with `SENTRY_PROFILING_ENABLED=true`;
+  an unavailable profiler no longer prevents standard error reporting from
+  starting.
+
 ## 1.2.2
 
 ### Patch Changes
