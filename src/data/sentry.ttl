@@ -11,7 +11,7 @@ sentry:
     a owl:Ontology ;
     dcterms:description "Terms of the Sentry error-reporting package."@en ;
     dcterms:title "Linked Sentry"@en ;
-    owl:versionInfo "1.3.0" .
+    owl:versionInfo "1.4.0" .
 
 sentry:ExampleClass
     a owl:Class ;
