@@ -11,7 +11,7 @@
  * From a sibling module the same import is ordinary and survives.
  */
 import * as terms from './sentry.js';
-import {ns} from './sentry.js';
+import {dataFiles, loadData, ns} from './sentry.js';
 import {linkedOntology} from '../package.js';
 
-linkedOntology(terms, ns, 'sentry');
+linkedOntology(terms, ns, 'sentry', loadData, dataFiles);
