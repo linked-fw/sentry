@@ -1,5 +1,11 @@
 # @\_linked/sentry
 
+## 1.4.1
+
+### Patch Changes
+
+- [#62](https://github.com/linked-fw/sentry/pull/62) [`a59cd68`](https://github.com/linked-fw/sentry/commit/a59cd6834676733745dbf070fc11b4b686e1b4fd) Thanks [@flyon](https://github.com/flyon)! - License: MIT (data under its original license)
+
 ## 1.4.0
 
 ### Minor Changes
