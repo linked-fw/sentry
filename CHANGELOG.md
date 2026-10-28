@@ -1,5 +1,13 @@
 # @\_linked/sentry
 
+## 1.4.2
+
+### Patch Changes
+
+- [#67](https://github.com/linked-fw/sentry/pull/67) [`bc48e52`](https://github.com/linked-fw/sentry/commit/bc48e5289b89b6b596c003434d147b42d402b8ab) Thanks [@flyon](https://github.com/flyon)! - `package.json` says what this package is in `"linked": {"kind": "library"}` instead of `"linkedPackage": true`, which the CLI and server no longer read.
+
+- [#67](https://github.com/linked-fw/sentry/pull/67) [`4e8a4a0`](https://github.com/linked-fw/sentry/commit/4e8a4a016c629b820fc528218880b95de7c29225) Thanks [@flyon](https://github.com/flyon)! - Remove the unused `tsconfig-es5.json`. No script referenced it; running it by accident would have overwritten `lib/` with declaration-less ES5. Build output is unchanged.
+
 ## 1.4.1
 
 ### Patch Changes
