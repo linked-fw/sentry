@@ -129,7 +129,7 @@ PeaceGame already wires `shouldEnableSentry`, `initSentryInstrumentation`, and `
 
 ## Architecture docs
 
-No Create Now architecture doc (`docs/architecture/*`) owns this package’s Sentry wiring. Package `readme.md` is the consumer contract and was rewritten on the branch. No CN architecture update required for this scope.
+No host-app architecture doc owns this package’s Sentry wiring. Package `readme.md` is the consumer contract and was rewritten on the branch. No host-app architecture update required for this scope.
 
 ## Known limitations / follow-ups
 
