@@ -79,5 +79,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "linkedOntologies": {
+    "sentry": {
+      "namespace": "https://linked.cm/ont/sentry/",
+      "generated": false
+    }
   }
 }
