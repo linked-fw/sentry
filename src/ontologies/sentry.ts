@@ -1,7 +1,7 @@
 import { createNameSpace } from '@_linked/core/utils/NameSpace';
 
 /**
- * First-party ontologies live on linked.cm: `https://linked.cm/ont/{ontologySlug}/`, and a
+ * First-party ontologies live on linked.cm: `https://linked.cm/ont/{name}/`, and a
  * package's own ontology takes the package's publicSlug (`@_linked/sentry` → `sentry`).
  * Until this release it was `http://lincd.org/ont/sentry/`; none of its terms types stored data.
  */
