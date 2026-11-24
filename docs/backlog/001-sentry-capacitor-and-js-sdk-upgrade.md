@@ -4,7 +4,7 @@ summary: >
   `@sentry/*` sibling, so `@sentry/capacitor`, `@sentry/react`, `@sentry/node` and
   `@sentry/profiling-node` can only move together, in one PR. Covers Renovate PRs sentry#34
   (`@sentry/capacitor` to v4) and sentry#27 (sentry-javascript to 8.55.2, which is unreachable).
-  Blocked on the Session Replay decision (Create Now backlog 051); v4 does NOT require
+  Blocked on the host app's Session Replay decision; v4 does NOT require
   Capacitor 8.
 status: Deferred -- held by the shared Renovate preset; replaces Renovate PRs linked-fw/sentry#34 and #27
 ---
@@ -16,8 +16,7 @@ status: Deferred -- held by the shared Renovate preset; replaces Renovate PRs li
 up, because no single-package Sentry PR here can be installed. Renovate PRs
 [#34](https://github.com/linked-fw/sentry/pull/34) and
 [#27](https://github.com/linked-fw/sentry/pull/27) are superseded by this note. The product
-question behind it -- does Create Now keep Session Replay? -- lives in Create Now's
-`docs/backlog/051-sentry-capacitor-deep-import.md`.
+question behind it -- does the host app keep Session Replay? -- lives in the host app's backlog.
 
 ## How it is used here
 
@@ -72,7 +71,7 @@ integration and both `replays*SampleRate` options must go.
 
 ## When this is unblocked
 
-1. Settle the Session Replay question (Create Now backlog 051) and pick the capacitor target:
+1. Settle the host app's Session Replay question and pick the capacitor target:
    **3.2.2** keeps Session Replay on JS SDK **10.43.0**; **4.4.0** drops it on **10.69.0**.
 2. In **one PR**, set `@sentry/react`, `@sentry/node` and `@sentry/profiling-node` to exactly the
    version that capacitor release pins. If on 4.x, remove `replayIntegration` and the

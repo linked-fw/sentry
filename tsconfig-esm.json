@@ -12,7 +12,7 @@
     // subpath is simply not published. The versions are already aligned (both
     // 8.55.0), so there is nothing to reconcile: it is fixed upstream only from
     // @sentry/capacitor 2.x, which requires @sentry/browser + @sentry/react 9.x.
-    // See docs/backlog/051-sentry-capacitor-deep-import.md in the CN repo.
+    // See docs/backlog/001-sentry-capacitor-and-js-sdk-upgrade.md.
     // REVISIT: drop this flag when @sentry/capacitor is next upgraded and
     // re-run the build — it suppresses errors in EVERY .d.ts, so a real
     // breakage in any dependency can hide behind it.

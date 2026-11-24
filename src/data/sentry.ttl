@@ -6,12 +6,15 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix schema: <http://schema.org/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
 
 sentry:
     a owl:Ontology ;
     dcterms:description "Terms of the Sentry error-reporting package."@en ;
     dcterms:title "Linked Sentry"@en ;
-    owl:versionInfo "1.4.0" .
+    owl:versionInfo "1.4.0" ;
+    vann:preferredNamespacePrefix "sentry" ;
+    vann:preferredNamespaceUri "https://linked.cm/ont/sentry/" .
 
 sentry:ExampleClass
     a owl:Class ;
