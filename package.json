@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/linked-fw/sentry.git"
   },
-  "version": "1.4.2",
+  "version": "2.0.0",
   "packageManager": "npm@12.2.0",
   "type": "module",
   "linked": {

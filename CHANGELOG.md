@@ -1,5 +1,17 @@
 # @\_linked/sentry
 
+## 2.0.0
+
+### Major Changes
+
+- [#75](https://github.com/linked-fw/sentry/pull/75) [`05983c3`](https://github.com/linked-fw/sentry/commit/05983c3845faf9300b96f6743f81bee32785f482) Thanks [@flyon](https://github.com/flyon)! - The ontology is registered by `src/ontologies/index.ts` (core's `registerOntologies`), which the package entry imports; the package registers no prefix (an app's prefix map, `linked.app.json`, holds the prefixes; the ontology's data suggests one). `src/package.ts` exports `registerOntologies` instead of `linkedOntology`. Requires the `@_linked/core` major with `registerOntologies`. Removed: `ontologies/sentry.register` and the `dataFiles` and `loadData` exports of `ontologies/sentry`; the module no longer adds the `sentry` prefix.
+
+### Patch Changes
+
+- [#75](https://github.com/linked-fw/sentry/pull/75) [`5f769d5`](https://github.com/linked-fw/sentry/commit/5f769d51ef8c2cd42478b16810bb42358aeb16c0) Thanks [@flyon](https://github.com/flyon)! - The first-party namespace rule in the ontology's comment reads `https://linked.cm/ont/{name}/`, `{name}` being the ontology's name.
+
+- [#75](https://github.com/linked-fw/sentry/pull/75) [`ac057c3`](https://github.com/linked-fw/sentry/commit/ac057c3f85bb6891b4c02af827ba718aba30f9d4) Thanks [@flyon](https://github.com/flyon)! - The ontology is declared in `package.json` `"linkedOntologies"` and its data states its suggested prefix and namespace (`vann:preferredNamespacePrefix`, `vann:preferredNamespaceUri`); the module stays hand-written (`"generated": false`). No import path or export changes.
+
 ## 1.4.2
 
 ### Patch Changes
