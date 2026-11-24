@@ -1,5 +1,11 @@
 # @\_linked/sentry
 
+## 2.0.1
+
+### Patch Changes
+
+- [#77](https://github.com/linked-fw/sentry/pull/77) [`4a37086`](https://github.com/linked-fw/sentry/commit/4a37086649814330c2c53060c3cbed6f5f610ed7) Thanks [@flyon](https://github.com/flyon)! - Depends on @_linked/server-utils ^2.0.0 (was ^1.15.0)
+
 ## 2.0.0
 
 ### Major Changes
